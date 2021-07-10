@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
+  </head>
+  <body>
+    <div  style="padding-top:100px;padding-left: 20px;padding-right: 20px;">
+      <div class="row">
+          <div class="col-md-5 mt-5 p-3">
+            <form action="/" method="POST">
+              <div class="mb-3" style="border: 1px solid;border-radius: 10px;padding: 25px;">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username">
+              <div style="margin-top: 10px;">
+              <div class="dropdown" style="display: inline;">
+      <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">No. of tweets
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li><a href="#">5</a></li>
+        <li><a href="#">10</a></li>
+        <li><a href="#">15</a></li>
+        <li><a href="#">20</a></li>
+      </ul> -->
+      <div class="input-group">
+        <span class="input-group-addon">Please select</span>
+            <select name="noOfTweets" class="selectpicker form-control">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+            </select>
+      </div>
+    </div>
+    <input type="submit" class="btn btn-success" value="submit"></input>
+    </div>
+          </div>
+        </form>
+        <div style="border: 1px solid;border-radius: 20px;margin-top: 100px;padding: 20px;">
+    
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+          Facere, vitae dignissimos dolore vero aperiam qui similique. I
+          ncidunt vitae, officiis, earum laborum saepe ullam, neque error voluptate ab nostrum quasi inventore.
+        
+        
+      </div>
+     
+        </div>
+        <div class="col-md-1 mt-5 p-3"></div>
+        <div class="col-md-6 mt-5 p-3" style="border: 1px solid;border-radius: 20px;height: 500px;overflow-y: scroll;">
+         
+          {% for tweet in tweets %}
+          <div class="card mb-3" style="max-width: 540px;padding-left: 10px;padding-top: 10px;">
+            <div class="row g-0">
+                <div class="card-body">
+                  <p class="card-text">{{tweet.text}}</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+           <div class=" row" style="position:fixed;bottom: 110px;">
+            <button type="button" class="btn btn-success">View Analysis</button>
+          </div>
+          </div> 
+         
+      </div>  
+     
+        
+   </div>
+
+
+  </body>
+</html>
