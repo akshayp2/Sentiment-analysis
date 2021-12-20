@@ -1,78 +1,99 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/main.css">
-  </head>
-  <body>
-    <div  style="padding-top:100px;padding-left: 20px;padding-right: 20px;">
-      <div class="row">
-          <div class="col-md-5 mt-5 p-3">
-            <form action="/" method="POST">
-              <div class="mb-3" style="border: 1px solid;border-radius: 10px;padding: 25px;background-color: white;">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" autocomplete="off">
-              <div style="margin-top: 10px;">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" type="text/css" href="../static/main.css">
+</head>
+
+
+<body>
+  <div style="padding-top:15px;padding-left: 20px;padding-right: 20px;">
+    <div class="row">
+      <h1 style="text-align: center;color: white;margin-bottom: 30px;">Tweet Analysis System</h1>
+    </div>
+    <div class="row">
+      <div class="col-md-5 mt-5 p-3">
+        <form action="/" method="POST">
+          <div class="user-input">
+            <h3>User Details</h3>
+            <input type="text" class="form-control" id="username" name="username" autocomplete="off"
+            value="{{username}}"
+              placeholder="Username">
+            <div style="margin-top: 10px;">
               <div class="dropdown" style="display: inline;">
-      <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">No. of tweets
-      <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <li><a href="#">5</a></li>
-        <li><a href="#">10</a></li>
-        <li><a href="#">15</a></li>
-        <li><a href="#">20</a></li>
-      </ul> -->
-      <div class="input-group">
-        <span class="input-group-addon">Please select</span>
-            <select name="noOfTweets" class="selectpicker form-control">
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
-              <option value="20">20</option>
-            </select>
-      </div>
-    </div>
-    <input type="submit" class="btn btn-success" value="submit"></input>
-    </div>
-          </div>
-        </form>
-        <div style="border: 1px solid;border-radius: 20px;margin-top: 100px;padding: 20px;background-color: white;">
-    
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-          Facere, vitae dignissimos dolore vero aperiam qui similique. I
-          ncidunt vitae, officiis, earum laborum saepe ullam, neque error voluptate ab nostrum quasi inventore.
-        
-        
-      </div>
-     
-        </div>
-        <div class="col-md-2 mt-5 p-3"></div>
-        <div class="col-md-5 mt-5 p-3" style="height: 500px;overflow-y: scroll;background-color: #AED6F1;">
-         
-          {% for tweet in tweets %}
-          <div class="card mb-3" style="max-width: 540px;padding-left: 10px;padding-top: 10px;">
-            <div class="row g-0">
-                <div class="card-body">
-                  <p class="card-text" >{{tweet.text}}</p>
-                  <p class="card-text" ><small class="text-muted">Last updated 3 mins ago</small></p>
+                <div class="input-group">
+                  <span class="input-group-addon">No. of Tweets </span>
+                  <select name="noOfTweets" class="selectpicker form-control">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                  </select>
+                </div>
               </div>
+              <input type="submit" class="btn btn-success" value="submit" style="margin-top: 10px;"></input>
             </div>
           </div>
-          {% endfor %}
-
-           <div class=" row" style="position:fixed;bottom: 110px;">
-            <button type="button" class="btn btn-success">View Analysis</button>
+        </form>
+        <div class="graph-box">
+          <canvas id="myChart" class="graph-card"></canvas>
+          <script>
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var barChart = new Chart(ctx, {
+              type: "bar",
+              data: {
+                labels: {{ labels | safe}}, //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                  label: 'Emotions',
+                  data: {{ data | safe}}, //[65, 59, 80, 81, 56, 55, 40],
+                  backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 205, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(255, 159, 64)',
+                  'rgb(255, 205, 86)',
+                  'rgb(75, 192, 192)',
+                  'rgb(54, 162, 235)',
+                  'rgb(153, 102, 255)',
+                  'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1
+              }]
+              },
+              options: {
+                responsive: false
+              }
+            })
+          </script>
+        </div>
+      </div>
+      <div class="col-md-2 mt-5 p-3"></div>
+      <div class="col-md-5 mt-5 p-3 tweetbox">
+        <h3>User Tweets</h3>
+        {% for tweet in tweets %}
+        <div class="card mb-3 tweetbox-item">
+          <div class="row g-0">
+            <div class="card-body" style="padding: 15px;">
+              <p class="card-text">{{tweet.text}}</p>
+              <p class="card-text"><small class="text-muted" style="color: #5069e4;">{{tweet.created_at}}</small></p>
+            </div>
           </div>
-          </div> 
-         
-      </div>  
-     
-        
-   </div>
-
-
-  </body>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</body>
 </html>
