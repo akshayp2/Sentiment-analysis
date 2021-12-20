@@ -2,3 +2,35 @@ body{
     background-image: url("./bg.jpg");
     background-size: cover;
 }
+.tweetbox{
+    height: 500px;
+    overflow-y: scroll;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 10px 10px 25px 0px #000;
+}
+.tweetbox-item{
+    max-width: 540px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+.user-input{
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 0px 25px 25px 25px;
+    background-color: white;
+}
+.graph-box{
+    border: 1px solid;
+    border-radius: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: white;
+}
+.graph-card{
+    display: block;
+    box-sizing: border-box;
+    height: 226px;
+    width: 470px;
+}
